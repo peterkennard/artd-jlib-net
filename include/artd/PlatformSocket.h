@@ -4,8 +4,11 @@
 #include "artd/jlib_net.h"
 
 #ifdef ARTD_WINDOWS
+	#ifndef WIN32_LEAN_AND_MEAN
+		#define WIN32_LEAN_AND_MEAN		/// &brief Exclude rarely-used stuff from Windows headers
+	#endif
+
 	#define _WINSOCK_DEPRECATED_NO_WARNINGS
-	#include "artd/platform_specific.h"
 	#include <winsock2.h>
 	#pragma comment( lib, "Ws2_32.lib")   
 	#include <io.h>
