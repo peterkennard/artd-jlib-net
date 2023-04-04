@@ -48,7 +48,7 @@ public:
 			server_ = s;
 		}
 
-		void setSocket(ObjectPtr<Socket>  &s) {
+		void setSocket(ObjectPtr<Socket> s) {
 			socket_ = s;
 		}
 
