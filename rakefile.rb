@@ -9,6 +9,7 @@ Rakish::CppProject.new(
 	:dependsUpon 	=> [ "../artd-lib-logger",
 	                     "../artd-jlib-base",
 	                     "../artd-jlib-thread",
+	                     "../artd-jlib-util",  # for SimpleSocketServer
 	                     "../artd-jlib-io"
 	                   ]
 ) do
@@ -21,7 +22,7 @@ Rakish::CppProject.new(
         './OsSocket.cpp',
         './ServerSocket.cpp',
         './SimpleSocketClient.cpp',
-#        './SimpleSocketServer.cpp',
+        './SimpleSocketServer.cpp',
         './Socket.cpp',
         './SocketInputStream.cpp',
         './SocketOutputStream.cpp'

@@ -5,7 +5,7 @@
 // ARTD_HEADER_DESCRIPTION: SimpleSocketServer for simple client server implementations
 // ARTD_HEADER_DOC_END
 
-#include "artd/jlib_core.h"
+#include "artd/jlib_net.h"
 #include "artd/RcString.h"
 #include "artd/InputStream.h"
 #include "artd/OutputStream.h"
@@ -13,15 +13,14 @@
 #include "artd/ServerSocket.h"
 #include "artd/ObjLinkedList.h"
 #include "artd/synchronized.h"
-#include "artd/CriticalSection.h"
+#include "artd/Mutex.h"
 #include "artd/WaitableSignal.h"
 
 ARTD_BEGIN
 
 
 class ARTD_API_JLIB_NET SimpleSocketServerBase
-	: public ObjectBase
-	, public Runnable
+	: public Runnable
 {
 	RcString address_;
 	int listenPort_;
@@ -37,8 +36,7 @@ public:
 	~SimpleSocketServerBase();
 
 	class ARTD_API_JLIB_NET ServerSession
-		: public ObjectBase
-		, public Runnable
+		: public Runnable
 	{
 		friend class SimpleSocketServerBase;
 
@@ -60,7 +58,7 @@ public:
 	public:
 
 		ServerSession() {
-			ObjectPtr<Thread> temp = ObjectBase::make<Thread>(sharedFromThis(this));
+			ObjectPtr<Thread> temp = ObjectBase::make<Thread>(sharedFromThis<Runnable>(this));
 			myThread_ = temp;  // TODO: release ref held by thread ??
 		}
 		SimpleSocketServerBase *getServer() {
@@ -92,7 +90,7 @@ public:
 
 	};
 
-	CriticalSection clientListLock_;
+	Mutex clientListLock_;
 
 	virtual  ObjectPtr<ServerSession> getNewSession() = 0;
 

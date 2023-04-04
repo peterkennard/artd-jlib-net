@@ -102,7 +102,7 @@ SimpleSocketServerBase::run() {
 bool 
 SimpleSocketServerBase::start() {
 	
-	ObjectPtr<Thread> th = ObjectBase::make<Thread>(sharedFromThis(this));
+	ObjectPtr<Thread> th = ObjectBase::make<Thread>(sharedFromThis<Runnable>(this));
 
 	listenThread_ = th;
 	running_ = true;
