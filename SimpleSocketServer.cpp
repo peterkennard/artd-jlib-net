@@ -7,7 +7,7 @@ SimpleSocketServerBase::SimpleSocketServerBase(int listenPort)
 	: listenPort_(listenPort)
 {
 	debug_ = false;
-	sessions_ = ObjectBase::make<ObjLinkedList<ServerSession>>();
+	sessions_ = ObjectPtr<ObjLinkedList<ServerSession>>::make();
 }
 SimpleSocketServerBase::~SimpleSocketServerBase() {
 }
@@ -56,7 +56,7 @@ SimpleSocketServerBase::run() {
 
 		//try {
 
-		listenSocket_ = ObjectBase::make<ServerSocket>(listenPort_);
+		listenSocket_ = ObjectPtr<ServerSocket>::make(listenPort_);
 		listenSocket_->setReuseAddress(true);
 		listenSocket_->setSoTimeout(20000);
 
@@ -102,7 +102,7 @@ SimpleSocketServerBase::run() {
 bool 
 SimpleSocketServerBase::start() {
 	
-	ObjectPtr<Thread> th = ObjectBase::make<Thread>(sharedFromThis<Runnable>(this));
+	ObjectPtr<Thread> th = ObjectPtr<Thread>::make(sharedFromThis<Runnable>(this));
 
 	listenThread_ = th;
 	running_ = true;

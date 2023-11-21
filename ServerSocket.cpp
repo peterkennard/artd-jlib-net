@@ -41,7 +41,7 @@ ServerSocket::accept() {
 		deleteZ(otherImpl);
 		return(nullptr);
 	}
-	ObjectPtr<Socket> ret = ObjectBase::make<Socket>();
+	ObjectPtr<Socket> ret = ObjectPtr<Socket>::make();
 	if (!ret) {
 		delete otherImpl;
 		return nullptr;

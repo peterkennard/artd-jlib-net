@@ -58,7 +58,7 @@ public:
 	public:
 
 		ServerSession() {
-			ObjectPtr<Thread> temp = ObjectBase::make<Thread>(sharedFromThis<Runnable>(this));
+			ObjectPtr<Thread> temp = ObjectPtr<Thread>::make(sharedFromThis<Runnable>(this));
 			myThread_ = temp;  // TODO: release ref held by thread ??
 		}
 		SimpleSocketServerBase *getServer() {

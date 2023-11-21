@@ -16,7 +16,7 @@ SimpleSocketClient::~SimpleSocketClient() {
 int 
 SimpleSocketClient::openConnection(const char *address, int port, int connectTimeout)
 {
-	socket_ = ObjectBase::make<Socket>();
+	socket_ = ObjectPtr<Socket>::make();
     const char *msg = "";
 	if (!socket_->init()) { msg = "init"; goto error; }
 	if (!socket_->connect(address, port)) { msg="connect"; goto error; }
